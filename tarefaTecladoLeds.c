@@ -107,6 +107,7 @@ int main() {
             case 'A':
             for(int i=0; i<NUM_PIXELS; i++)
                 put_pixel(pio,sm,urgb_u32(0,0,0));
+            gpio_put(BUZZER_A,0); gpio_put(BUZZER_B,0);
             break;
 
             // Liga todos os pixels na cor azul com 100%
