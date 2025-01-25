@@ -6,7 +6,7 @@ Este projeto tem por objetivo controlar a operação de uma matriz de LEDs RGB d
 **Instruções de uso**
 
 A tecla A desliga todos os LEDs e buzzers.
-A tecla B liga todos os LEDs na cor azul com 100% de intensidade
+A tecla B liga todos os LEDs na cor azul com 100% de intensidade.
 A tecla C liga todos os LEDs na cor vermelha com 80% de intensidade.
 A tecla D liga todos os LEDs na cor verde com 50% de intensidade.
 A tecla # liga todos os LEDs na cor branca com 20% de intensidade.
