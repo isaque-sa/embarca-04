@@ -24,7 +24,7 @@
 #define PIN_ROW_3 9
 #define PIN_ROW_4 8
 
-// Envia um pixel para o PIO
+/// Envia um pixel para o PIO
 static inline void put_pixel(PIO pio, uint sm, uint32_t pixel_grb) {
     pio_sm_put_blocking(pio, sm, pixel_grb << 8u);
 }
@@ -80,13 +80,15 @@ char get_char(void)
     return key_char;
 }
 
+void animacao_0(uint8_t num_pix, PIO pio, uint sm, uint32_t (* urgb)(uint8_t,uint8_t,uint8_t), void (*put_p)(PIO,uint,uint32_t));
+
 int main() {
     // Iicialização da comunicação serial
     stdio_init_all();
 
     // Inicialização do teclado
     init_keyboard();
-    
+
     // Inicialização do PIO
     PIO pio; uint sm; uint offset;
     bool success = pio_claim_free_sm_and_add_program_for_gpio_range(&ws2812_program, &pio, &sm, &offset, WS2812_PIN, 1, true);
@@ -96,13 +98,63 @@ int main() {
     // Inicialização dos buzzers
     init_buzzers();
 
-    char character;
+    char character_1, character_2 = 0;
     
     sleep_us(1);
 
     while (1) {
-        character = get_char();
-        switch(character){
+        character_1 = get_char();
+        sleep_ms(1);
+
+        if(character_1 == 'A')
+            character_2 = character_1;
+
+        if(character_1 == 'B')
+            character_2 = character_1;
+
+        if(character_1 == 'C')
+            character_2 = character_1;
+
+        if(character_1 == 'D')
+            character_2 = character_1;
+
+        if(character_1 == '#')
+            character_2 = character_1;
+
+        if(character_1 == '*')
+            character_2 = character_1;
+
+        if(character_1 == '0')
+            character_2 = character_1;
+
+        if(character_1 == '1')
+            character_2 = character_1;
+
+        if(character_1 == '2')
+            character_2 = character_1;
+
+        if(character_1 == '3')
+            character_2 = character_1;
+
+        if(character_1 == '4')
+            character_2 = character_1;
+
+        if(character_1 == '5')
+            character_2 = character_1;
+
+        if(character_1 == '6')
+            character_2 = character_1;
+
+        if(character_1 == '7')
+            character_2 = character_1;
+
+        if(character_1 == '8')
+            character_2 = character_1;
+
+        if(character_1 == '9')
+            character_2 = character_1;
+
+        switch(character_2){
             // Desliga todos os pixels
             case 'A':
             for(int i=0; i<NUM_PIXELS; i++)
@@ -184,9 +236,9 @@ int main() {
             //animacao_etc_tal();
             break;
 
-            // Animação etc_e_tal
+            // Animação 0
             case '0':
-            //animacao_etc_tal();
+            //animacao_0(NUM_PIXELS,pio,sm,urgb_u32,put_pixel);
             break;
         }
     }
