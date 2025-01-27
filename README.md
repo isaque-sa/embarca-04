@@ -1,4 +1,4 @@
-# LED Matrix Love Display with Music
+# Uso de Matriz de Leds 5X5 e player de música via buzzer
 
 Este projeto implementa uma exibição interativa em uma matriz de LED 5x5 com acompanhamento musical usando o Raspberry Pi Pico. O display apresenta uma sequência de animações que incluem letras formando a palavra "LOVE", um coração pulsante, uma bandeira arco-íris e efeitos de onda colorida, tudo sincronizado com uma melodia reproduzida através de um buzzer.
 
