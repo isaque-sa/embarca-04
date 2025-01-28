@@ -1,1 +1,8 @@
 build
+.vscode
+tarefaTecladoLeds.zip
+CMakeLists.txt
+pico_sdk_import.CMakeLists
+README.md
+ws2812b.pio
+main_led.c
