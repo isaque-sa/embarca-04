@@ -238,11 +238,13 @@ int main() {
 
             // Animação 0
             case '0':
-            //animacao_0(NUM_PIXELS,pio,sm,urgb_u32,put_pixel);
+            animacao_0(NUM_PIXELS,pio,sm,urgb_u32,put_pixel);
             break;
         }
     }
 
     // This will free resources and unload our program
     pio_remove_program_and_unclaim_sm(&ws2812_program, pio, sm, offset);
+
+    return 0;
 }
