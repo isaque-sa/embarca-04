@@ -81,13 +81,14 @@ char get_char(void)
 }
 
 void animacao_0(uint8_t num_pix, PIO pio, uint sm, uint32_t (* urgb)(uint8_t,uint8_t,uint8_t), void (*put_p)(PIO,uint,uint32_t));
+void animacaoBrasil(PIO pio, uint sm);
 
 int main() {
     // Iicialização da comunicação serial
     stdio_init_all();
 
     // Inicialização do teclado
-    init_keyboard();
+    //init_keyboard();
 
     // Inicialização do PIO
     PIO pio; uint sm; uint offset;
@@ -103,7 +104,7 @@ int main() {
     sleep_us(1);
 
     while (1) {
-        character_1 = get_char();
+        character_1 = getchar_timeout_us(0);
         sleep_ms(1);
 
         if(character_1 == 'A')
@@ -191,9 +192,9 @@ int main() {
             reset_usb_boot(0,0);
             break;
 
-            // Animação etc_e_tal
+            // Animação Brasil
             case '1':
-            //animacao_etc_tal();
+            animacaoBrasil(pio,sm);
             break;
 
             // Animação etc_e_tal

@@ -33,7 +33,7 @@ project(tarefaTecladoLeds C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-set(SOURCE_EXE tarefaTecladoLeds.c animacao_0.c)
+set(SOURCE_EXE tarefaTecladoLeds.c animacao_0.c animacaoBrasil.c)
 
 # Add executable. Default name is the project name, version 0.1
 add_executable(tarefaTecladoLeds ${SOURCE_EXE})
@@ -46,7 +46,7 @@ pico_generate_pio_header(tarefaTecladoLeds ${CMAKE_CURRENT_LIST_DIR}/ws2812.pio)
 
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(tarefaTecladoLeds 0)
-pico_enable_stdio_usb(tarefaTecladoLeds 0)
+pico_enable_stdio_usb(tarefaTecladoLeds 1)
 
 # Add the standard library to the build
 target_link_libraries(tarefaTecladoLeds
