@@ -5,12 +5,14 @@ Este projeto tem por objetivo controlar a operação de uma matriz de LEDs RGB d
 
 **Instruções de uso**
 
-A tecla A desliga todos os LEDs e buzzers.
+A tecla A desliga todos os LEDs.
 A tecla B liga todos os LEDs na cor azul com 100% de intensidade.
 A tecla C liga todos os LEDs na cor vermelha com 80% de intensidade.
 A tecla D liga todos os LEDs na cor verde com 50% de intensidade.
 A tecla # liga todos os LEDs na cor branca com 20% de intensidade.
 A tecla * faz a Raspberry Pi Pico W sair do modo de execução e habilitar o modo de gravação via software (reboot).
-Cada uma das teclas de 0 a 9 faz a matriz de LEDs exibir uma animação diferente. Algumas destas animações é complementada com sinal sonoro pelos buzzers.
+Cada uma das teclas de 0 a 2 faz a matriz de LEDs exibir uma animação diferente. Como esta tarefa foi realizada por somente 3 alunos, foram implementadas somente 3 animações!
+
+Se for usada a placa BitDogLab, ao invés do Wokwi, a animação selecionada pelo caractere '2' pode ser complementada com um sinal sonoro emitido pelos buzzers. Neste caso, o teclado do computador deve ser utilizado. Para isso, somente o arquivo tarefaTecladoLdes.c deve ser alterado nas linhas 101, 115 e 120, de acordo com os comentários adicionados nestas respectivas linhas. Esta solução foi testada porque o core1 precisou ser usado para gerar o sinal de áudio, já que tanto animações, quanto sinais sonoros são produzidos com o auxílio de diferentes delays e a animação mencionada deve ser exibida em sincronismo com o referido sinal sonoro.
 
 Vídeo:

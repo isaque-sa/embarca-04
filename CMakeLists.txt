@@ -28,17 +28,12 @@ set(PICO_BOARD pico_w CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-<<<<<<< HEAD
 project(tarefaTecladoLeds C CXX ASM)
-=======
-project(main_led C CXX ASM)
->>>>>>> Tarefa3Moises
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-<<<<<<< HEAD
-set(SOURCE_EXE tarefaTecladoLeds.c animacao_0.c animacaoBrasil.c)
+set(SOURCE_EXE tarefaTecladoLeds.c animacao_0.c animacaoBrasil.c love_leds_funcao_moises.c)
 
 # Add executable. Default name is the project name, version 0.1
 add_executable(tarefaTecladoLeds ${SOURCE_EXE})
@@ -68,41 +63,9 @@ target_link_libraries(tarefaTecladoLeds
         hardware_timer
         hardware_clocks
         pico_cyw43_arch_none
+        hardware_pwm
+        pico_multicore
         )
 
 pico_add_extra_outputs(tarefaTecladoLeds)
-=======
-# Add executable. Default name is the project name, version 0.1
-
-add_executable(main_led main_led.c love_leds_funcao_moises.c)
-
-pico_set_program_name(main_led "main_led")
-pico_set_program_version(main_led "0.1")
-
-# Generate PIO header
-pico_generate_pio_header(main_led ${CMAKE_CURRENT_LIST_DIR}/ws2818b.pio)
-
-# Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(main_led 0)
-pico_enable_stdio_usb(main_led 0)
-
-# Add the standard library to the build
-target_link_libraries(main_led
-        pico_stdlib)
-
-# Add the standard include files to the build
-target_include_directories(main_led PRIVATE
-        ${CMAKE_CURRENT_LIST_DIR}
-)
-
-# Add any user requested libraries
-target_link_libraries(main_led 
-    hardware_pio
-    hardware_clocks
-    hardware_pwm
-    pico_multicore
-        )
-
-pico_add_extra_outputs(main_led)
->>>>>>> Tarefa3Moises
 

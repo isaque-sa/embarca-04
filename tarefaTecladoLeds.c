@@ -5,7 +5,9 @@
 #include "hardware/clocks.h"
 #include "pico/cyw43_arch.h"
 #include "ws2812.pio.h"
+#include "hardware/pwm.h"
 #include "pico/bootrom.h"
+#include "pico/multicore.h"
 
 #define NUM_PIXELS 25      // Quantidade de pixels da tarefa
 #define WS2812_PIN 7       // GPIO onde a cadeia de pixels está conectada
@@ -37,14 +39,19 @@ static inline uint32_t urgb_u32(uint8_t r, uint8_t g, uint8_t b) {
             (uint32_t) (b);
 }
 
+// Mapeamento das teclas
 char key_map[NUM_ROWS][NUM_COLS] = {
     {'1','2','3','A'},
     {'4','5','6','B'},
     {'7','8','9','C'},
     {'*','0','#','D'}};
 
+// Variáveis que representam linhas e colunas do teclado
 uint8_t key_rows[NUM_ROWS] = {PIN_ROW_1,PIN_ROW_2,PIN_ROW_3,PIN_ROW_4};
 uint8_t key_cols[NUM_COLS] = {PIN_COL_1,PIN_COL_2,PIN_COL_3,PIN_COL_4};
+
+// Variável que retém o último caractere válido capturado
+char character_2 = 0;
 
 void init_keyboard(void)
 {
@@ -80,15 +87,18 @@ char get_char(void)
     return key_char;
 }
 
+// Declaração dos protótipos das funções externas
 void animacao_0(uint8_t num_pix, PIO pio, uint sm, uint32_t (* urgb)(uint8_t,uint8_t,uint8_t), void (*put_p)(PIO,uint,uint32_t));
 void animacaoBrasil(PIO pio, uint sm);
+void animar(PIO pio, uint sm);
+void music_thread();
 
 int main() {
     // Iicialização da comunicação serial
     stdio_init_all();
 
     // Inicialização do teclado
-    //init_keyboard();
+    init_keyboard(); // Para usar o teclado do computador e a BitDogLab, esta chamada de função deve ser comentada.
 
     // Inicialização do PIO
     PIO pio; uint sm; uint offset;
@@ -99,12 +109,15 @@ int main() {
     // Inicialização dos buzzers
     init_buzzers();
 
-    char character_1, character_2 = 0;
-    
+    char character_1;
+
+    // Lança o core1, que produz os sons nos buzzers
+    //multicore_launch_core1(music_thread); // Utilizando a BitDogLab, esta função pode ser habilitada!
+
     sleep_us(1);
 
     while (1) {
-        character_1 = getchar_timeout_us(0);
+        character_1 = get_char(); // Para usar o teclado do computador, get_char() deve ser substituída por getchar_timeout_us(0)
         sleep_ms(1);
 
         if(character_1 == 'A')
@@ -155,12 +168,20 @@ int main() {
         if(character_1 == '9')
             character_2 = character_1;
 
+        // Pausa e relança o core1
+        if(character_2 == '2'){
+            gpio_set_function(BUZZER_A, GPIO_FUNC_PWM);
+            gpio_set_function(BUZZER_B, GPIO_FUNC_PWM);
+        }else{
+            gpio_set_function(BUZZER_A, GPIO_FUNC_NULL);
+            gpio_set_function(BUZZER_B, GPIO_FUNC_NULL);
+        }
+
         switch(character_2){
             // Desliga todos os pixels
             case 'A':
             for(int i=0; i<NUM_PIXELS; i++)
                 put_pixel(pio,sm,urgb_u32(0,0,0));
-            gpio_put(BUZZER_A,0); gpio_put(BUZZER_B,0);
             break;
 
             // Liga todos os pixels na cor azul com 100%
@@ -197,9 +218,9 @@ int main() {
             animacaoBrasil(pio,sm);
             break;
 
-            // Animação etc_e_tal
+            // Animação mista
             case '2':
-            //animacao_etc_tal();
+            animar(pio,sm);
             break;
 
             // Animação etc_e_tal
