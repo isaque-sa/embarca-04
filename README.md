@@ -15,4 +15,6 @@ Cada uma das teclas de 0 a 2 faz a matriz de LEDs exibir uma animação diferent
 
 Se for usada a placa BitDogLab, ao invés do Wokwi, a animação selecionada pelo caractere '2' pode ser complementada com um sinal sonoro emitido pelos buzzers. Neste caso, o teclado do computador deve ser utilizado. Para isso, somente o arquivo tarefaTecladoLdes.c deve ser alterado nas linhas 101, 115 e 120, de acordo com os comentários adicionados nestas respectivas linhas. Esta solução foi testada porque o core1 precisou ser usado para gerar o sinal de áudio, já que tanto animações, quanto sinais sonoros são produzidos com o auxílio de diferentes delays e a animação mencionada deve ser exibida em sincronismo com o referido sinal sonoro.
 
-Vídeo:
+Vídeos: https://youtu.be/0t8WhFfryZk    https://youtu.be/WCT3at54Fpc
+
+No primeiro vídeo foi utilizado o Wokwi e no segundo foi utilizada a BitDogLab.
